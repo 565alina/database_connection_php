@@ -1,0 +1,42 @@
+<?php
+
+
+
+$corporateid = $_POST['corporateid'];
+$companyname = $_POST['companyname'];
+$companyaddress = $_POST['companyaddress'];
+$companyemailaddress = $_POST['companyemailaddress'];
+$companyphonenumber = $_POST['companyphonenumber'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+
+$username = "root";
+$password ="";
+$dbName ="BCA";
+$host = "localhost";
+
+$conn = mysqli_connect($host,$username,$password,$dbName);
+if(!$conn){
+    die("cannot connect to Database" .$dbName);
+}
+
+
+
+	
+
+else{
+		$stmt = $conn->prepare ("insert into registration(corporateid ,companyname, companyaddress,companyemail address,companyphonenumber,username,password) values(?,?,?,?,?,?,?)");
+	
+
+		$stmt->bind_param("isssiss",  $corporateid,$companyname, $companyaddress, $companyemailaddress, $companyphonenumber,$username, $password);
+		$execval = $stmt->execute();
+		echo $execval;
+		echo "Registration successfully...";
+		$stmt->close();
+		$conn->close();
+	}
+
+  
+
+?>
